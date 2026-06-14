@@ -1,8 +1,6 @@
 {
     "user1": {
-        "First Name": "Mike",
-        "Last Name": "Jordan",
-        "UserName": "mikejordan",
-        "Password": "123456789"
+        "UserName": "jackjordan",
+        "Password": "Password@123"
     }
 }
