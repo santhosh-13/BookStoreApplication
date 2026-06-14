@@ -139,10 +139,6 @@ npx playwright show-report
 * PUT request to update user data
 * Validate updated name
 
-**Note:** Reqres is a mock API and does not persist dynamically created users. Therefore, an existing user endpoint was used for GET and PUT validations.
-
 ---
 
-## Author
 
-Your Name
