@@ -1,7 +1,11 @@
-import { test,expect } from '@playwright/test';
+/// <reference types="node" />
+
+import { test, expect } from '@playwright/test';
 import { LoginPage } from '../pages/Loginpage';
 import { BookStorePage } from '../pages/BookStore';
 import data from '../test-data/data.json';
+import * as fs from 'fs';
+
 
 test('Book Store', async ({ page }) => {
     
@@ -38,11 +42,20 @@ test('Book Store', async ({ page }) => {
       const author = await row.locator('td').nth(2).textContent();
       const publisher = await row.locator('td').nth(3).textContent();
     
-
+//Printing to Console
   console.log(`Title: ${title}`);
   console.log(`Author: ${author}`);
   console.log(`Publisher: ${publisher}`);
 
+  //For File
+
+  const bookDetails = `
+Title: ${title}
+Author: ${author}
+Publisher: ${publisher}
+`;
+
+    fs.writeFileSync('book-details.txt', bookDetails);
 
   await login.logoutBtn.click()
 
