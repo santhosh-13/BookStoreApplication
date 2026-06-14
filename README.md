@@ -1,8 +1,8 @@
-# QA Automation Assignment – Playwright (JavaScript)
+# QA Automation Assignment – Playwright (TypeScript)
 
 ## Project Overview
 
-This project contains UI and API automation test scenarios implemented using **Playwright with JavaScript**.
+This project contains UI and API automation test scenarios implemented using **Playwright with TypeScript**.
 
 The assignment includes:
 
@@ -31,7 +31,7 @@ Using Reqres API:
 ## Tech Stack
 
 * Playwright
-* JavaScript
+* TypeScript
 * Node.js
 
 ---
@@ -54,18 +54,6 @@ project-root/
 ---
 
 ## Installation
-
-Clone the repository:
-
-```bash
-git clone <your-github-repo-link>
-```
-
-Navigate to project:
-
-```bash
-cd <project-folder-name>
-```
 
 Install dependencies:
 
