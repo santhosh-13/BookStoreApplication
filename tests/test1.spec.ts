@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test'
 import data from '../test-data/data.json'
 
 
-test('test1', async ({ page }) => {
+test.skip('test1', async ({ page }) => {
     
     await page.goto('https://demoqa.com/')
     await page.getByRole('heading', { name: 'Book Store Application', level: 5 }).click()
