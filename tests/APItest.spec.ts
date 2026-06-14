@@ -1,6 +1,6 @@
 import { test, expect, request } from '@playwright/test';
 
-let uid;
+let uid:number;
 
 test('Create User', async ({ request }) => {
     
