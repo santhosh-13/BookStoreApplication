@@ -2,9 +2,13 @@
 
 ## Project Overview
 
-This project contains UI and API automation test scenarios implemented using **Playwright with TypeScript**.
+This project contains UI and API automation test scenarios implemented using **Playwright with TypeScript** following the **Page Object Model (POM)** design pattern.
 
-The assignment includes:
+The assignment includes UI and API automation with validations, reusable page classes, test data management, and secure environment variable handling.
+
+---
+
+## Features
 
 ### UI Automation
 
@@ -13,7 +17,8 @@ The assignment includes:
 * Validate username and logout button
 * Search for the book **"Learning JavaScript Design Patterns"**
 * Validate search result
-* Print **Title, Author, and Publisher** into a file
+* Extract **Title, Author, and Publisher**
+* Store book details into a file (`book-details.txt`)
 * Logout successfully
 
 ### API Automation
@@ -24,7 +29,8 @@ Using Reqres API:
 * Validate response status code
 * Fetch and store `userId`
 * Get user details
-* Update user name and validate response
+* Update user name
+* Validate updated response
 
 ---
 
@@ -33,6 +39,18 @@ Using Reqres API:
 * Playwright
 * TypeScript
 * Node.js
+* Dotenv (Environment Variable Management)
+
+---
+
+## Framework Design Pattern
+
+This framework follows the **Page Object Model (POM)** approach for better maintainability and reusability.
+
+* **Pages** → Reusable page classes
+* **Tests** → Test execution logic
+* **Test Data** → JSON-based test data
+* **Environment Variables** → API key managed securely using `.env`
 
 ---
 
@@ -41,13 +59,21 @@ Using Reqres API:
 ```txt
 project-root/
 │── tests/
-│   ├── UItest.spec.js
-│   ├── APItest.spec.js
+│   ├── UItest.spec.ts
+│   ├── APItest.spec.ts
 │
-│── playwright-report/
-│── test-results/
+│── pages/
+│   ├── LoginPage.ts
+│   ├── BookStorePage.ts
+│
+│── test-data/
+│   ├── data.json
+│
+│── book-details.txt
+│── .env
+│── .gitignore
 │── package.json
-│── playwright.config.js
+│── playwright.config.ts
 │── README.md
 ```
 
@@ -69,6 +95,16 @@ npx playwright install
 
 ---
 
+## Environment Setup
+
+Create a `.env` file in project root and add:
+
+```env
+API_KEY=your_reqres_api_key
+```
+
+---
+
 ## Execute Tests
 
 Run all tests:
@@ -80,13 +116,13 @@ npx playwright test
 Run only UI tests:
 
 ```bash
-npx playwright test UItest.spec.js
+npx playwright test tests/UItest.spec.ts
 ```
 
 Run only API tests:
 
 ```bash
-npx playwright test APItest.spec.js
+npx playwright test tests/APItest.spec.ts
 ```
 
 Run tests in headed mode:
@@ -109,15 +145,23 @@ npx playwright show-report
 
 ## UI Test Scenario
 
-1. Navigate to DemoQA
-2. Login using manually created credentials
-3. Validate username and logout button
-4. Search for:
+1. Navigate to DemoQA website
+2. Navigate to Book Store Application
+3. Login using manually created credentials
+4. Validate username and logout button
+5. Search for:
 
    * **Learning JavaScript Design Patterns**
-5. Validate search result
-6. Store Title, Author, and Publisher into a file
-7. Logout
+6. Validate search result
+7. Extract:
+
+   * Title
+   * Author
+   * Publisher
+8. Save book details into:
+
+   * `book-details.txt`
+9. Logout successfully
 
 ---
 
@@ -125,20 +169,31 @@ npx playwright show-report
 
 ### Create User
 
-* POST request to create user
+* Send POST request
 * Validate status code `201`
 * Store generated `userId`
 
-### Get User
+### Get User Details
 
-* GET user details
-* Validate response
+* Send GET request
+* Validate response data
 
 ### Update User
 
-* PUT request to update user data
-* Validate updated name
+* Send PUT request
+* Update user name
+* Validate updated response
+
 
 ---
 
+## Run Report Screenshot
+
+After execution, the Playwright HTML report can be viewed using:
+
+```bash
+npx playwright show-report
+```
+
+---
 
