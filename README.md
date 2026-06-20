@@ -1,10 +1,10 @@
-# QA Automation Assignment – Playwright (TypeScript)
+# Playwright Automation Framework
 
 ## Project Overview
 
 This project contains UI and API automation test scenarios implemented using **Playwright with TypeScript** following the **Page Object Model (POM)** design pattern.
 
-The assignment includes UI and API automation with validations, reusable page classes, test data management, and secure environment variable handling.
+The framework includes end-to-end UI automation, API validation, reusable page classes, test data management, environment-based execution, reporting, and Jenkins CI integration.
 
 ---
 
@@ -12,25 +12,32 @@ The assignment includes UI and API automation with validations, reusable page cl
 
 ### UI Automation
 
-* Navigate to DemoQA website
-* Login using manually created user
-* Validate username and logout button
-* Search for the book **"Learning JavaScript Design Patterns"**
-* Validate search result
-* Extract **Title, Author, and Publisher**
-* Store book details into a file (`book-details.txt`)
-* Logout successfully
+* End-to-end web application testing
+* Cross-browser testing (Chromium, Firefox, WebKit)
+* Page Object Model (POM) implementation
+* Reusable page methods and utilities
+* Data-driven testing using JSON files
+* Parallel test execution
+* Environment-based configuration
+* Robust locator strategies for reliable execution
 
 ### API Automation
 
-Using Reqres API:
+* REST API testing using Playwright Request Context
+* GET, POST, PUT, PATCH, DELETE request validation
+* Response status code validation
+* Authentication handling
+* JSON schema validation
+* Request and response assertions
+* Data extraction and chaining between APIs
 
-* Create a user
-* Validate response status code
-* Fetch and store `userId`
-* Get user details
-* Update user name
-* Validate updated response
+### CI/CD Integration
+
+* Jenkins pipeline integration
+* Automated test execution
+* Continuous regression testing
+* Automated report generation
+* Faster feedback for development teams
 
 ---
 
@@ -39,18 +46,22 @@ Using Reqres API:
 * Playwright
 * TypeScript
 * Node.js
+* Jenkins
+* Git & GitHub
 * Dotenv (Environment Variable Management)
 
 ---
 
 ## Framework Design Pattern
 
-This framework follows the **Page Object Model (POM)** approach for better maintainability and reusability.
+This framework follows the **Page Object Model (POM)** approach for better maintainability, scalability, and reusability.
 
 * **Pages** → Reusable page classes
 * **Tests** → Test execution logic
-* **Test Data** → JSON-based test data
-* **Environment Variables** → API key managed securely using `.env`
+* **Fixtures** → Shared setup and teardown
+* **Utilities** → Common reusable functions
+* **Test Data** → JSON-based test data management
+* **Environment Variables** → Secure configuration using `.env`
 
 ---
 
@@ -59,21 +70,28 @@ This framework follows the **Page Object Model (POM)** approach for better maint
 ```txt
 project-root/
 │── tests/
-│   ├── UItest.spec.ts
-│   ├── APItest.spec.ts
+│   ├── ui/
+│   ├── api/
 │
 │── pages/
 │   ├── LoginPage.ts
-│   ├── BookStorePage.ts
+│   ├── DashboardPage.ts
+│   ├── BasePage.ts
+│
+│── fixtures/
+│
+│── utils/
 │
 │── test-data/
 │   ├── data.json
 │
-│── book-details.txt
+│── reports/
+│
 │── .env
 │── .gitignore
 │── package.json
 │── playwright.config.ts
+│── Jenkinsfile
 │── README.md
 ```
 
@@ -100,7 +118,10 @@ npx playwright install
 Create a `.env` file in project root and add:
 
 ```env
-API_KEY=your_reqres_api_key
+BASE_URL=https://your-application-url.com
+USERNAME=testuser
+PASSWORD=testpassword
+API_BASE_URL=https://api.example.com
 ```
 
 ---
@@ -116,19 +137,48 @@ npx playwright test
 Run only UI tests:
 
 ```bash
-npx playwright test tests/UItest.spec.ts
+npx playwright test tests/ui
 ```
 
 Run only API tests:
 
 ```bash
-npx playwright test tests/APItest.spec.ts
+npx playwright test tests/api
 ```
 
 Run tests in headed mode:
 
 ```bash
 npx playwright test --headed
+```
+
+Run tests in a specific browser:
+
+```bash
+npx playwright test --project=chromium
+```
+
+---
+
+## Jenkins Integration
+
+The framework supports automated execution through Jenkins.
+
+### Jenkins Pipeline Steps
+
+1. Pull latest code from GitHub
+2. Install project dependencies
+3. Install Playwright browsers
+4. Execute test suite
+5. Generate reports
+6. Publish results
+
+### Jenkins Execution Commands
+
+```bash
+npm install
+npx playwright install
+npx playwright test
 ```
 
 ---
@@ -143,57 +193,33 @@ npx playwright show-report
 
 ---
 
-## UI Test Scenario
+## Reporting & Debugging
 
-1. Navigate to DemoQA website
-2. Navigate to Book Store Application
-3. Login using manually created credentials
-4. Validate username and logout button
-5. Search for:
+* Playwright HTML Reports
+* Trace Viewer
+* Screenshot capture on failures
+* Video recording support
+* Detailed execution logs
 
-   * **Learning JavaScript Design Patterns**
-6. Validate search result
-7. Extract:
-
-   * Title
-   * Author
-   * Publisher
-8. Save book details into:
-
-   * `book-details.txt`
-9. Logout successfully
-
----
-
-## API Test Scenario
-
-### Create User
-
-* Send POST request
-* Validate status code `201`
-* Store generated `userId`
-
-### Get User Details
-
-* Send GET request
-* Validate response data
-
-### Update User
-
-* Send PUT request
-* Update user name
-* Validate updated response
-
-
----
-
-## Run Report Screenshot
-
-After execution, the Playwright HTML report can be viewed using:
+View traces:
 
 ```bash
-npx playwright show-report
+npx playwright show-trace trace.zip
 ```
+
+---
+
+## Framework Highlights
+
+* UI & API Automation in a single framework
+* Page Object Model (POM)
+* Reusable utilities and fixtures
+* Environment-based execution
+* Data-driven testing
+* Cross-browser testing
+* Parallel execution
+* Jenkins CI integration
+* Scalable and maintainable architecture
 
 ---
 
