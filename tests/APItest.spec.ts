@@ -16,18 +16,19 @@ test('Create User', async ({ request }) => {
     }
 
     const response = await request.post('https://reqres.in/api/users', {
-        headers: {
-            'x-api-key': process.env.API_KEY
-        },
-        data: {
-            name: 'Jack',
-            role: 'SDET'
-        }
-    });
+  headers: {
+    'x-api-key': process.env.API_KEY as string
+  },
+  data: {
+    name: 'Jack',
+    role: 'SDET'
+  }
+});
 
-    console.log('Create User Status =', response.status());
+console.log('Status =', response.status());
+console.log('Response =', await response.text());
 
-    expect(response.status()).toBe(201);
+expect(response.status()).toBe(201);
 
     const body = await response.json();
     uid = body.id;
